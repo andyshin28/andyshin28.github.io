@@ -11,14 +11,16 @@ function submitTask(){
     var taskContent = document.getElementById('wordsExpect').value;
     $.ajax({
         url:'test.txt',
-        method: 'post',
+        type: 'POST',
         data: {message: taskContent},
+        beforeSend: function(){},
         success: function(res){
             alert('任務新增成功！假的');
         },
         error: function(err){
             alert('新增任務有些小問題');
-        }
+        },
+        complete: function(){}
     });
 }
 
