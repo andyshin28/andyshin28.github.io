@@ -1,17 +1,32 @@
-var infoBox; // 訊息 label
-var textBox; // 最終的辨識訊息 text input
-var tempBox; // 中間的辨識訊息 text input
+var infoBox = document.getElementById("infoBox"); // 取得訊息控制項 infoBox
+var textBox = document.getElementById("wordsExpect"); // 取得最終的辨識訊息控制項 textBox
+var tempBox = document.getElementById("wordsExpect"); // 取得中間的辨識訊息控制項 tempBox
+var recordImgBtn = document.getElementById("recordImgBtn"); // 錄音鈕
 var startStopButton; // 「辨識/停止」按鈕
 var final_transcript = ''; // 最終的辨識訊息的變數
 var recognizing = false; // 是否辨識中
 
+// 送出任務
+function submitTask(){
+    var taskContent = document.getElementById('wordsExpect').value;
+    $.ajax({
+        url:'test.txt',
+        method: 'post',
+        data: {message: taskContent},
+        success: function(res){
+            alert('任務新增成功！假的');
+        },
+        error: function(err){
+            alert('新增任務有些小問題');
+        }
+    });
+}
+
+// 開始語音辨識
 function startRecord() {
-    infoBox = document.getElementById("infoBox"); // 取得訊息控制項 infoBox
-    textBox = document.getElementById("wordsExpect"); // 取得最終的辨識訊息控制項 textBox
-    tempBox = document.getElementById("wordsExpect"); // 取得中間的辨識訊息控制項 tempBox
     // startStopButton = document.getElementById("startStopButton"); // 取得「辨識/停止」這個按鈕控制項
     // langCombo = document.getElementById("langCombo"); // 取得「辨識語言」這個選擇控制項
-    var recordImgBtn = document.getElementById("recordImgBtn");
+
     if (recognizing) { // 如果正在辨識，則停止。
         recognition.stop();
         recordImgBtn.src = 'mic.gif';
@@ -29,7 +44,7 @@ if (!('webkitSpeechRecognition' in window)) {  // 如果找不到 window.webkitS
     // 就是不支援語音辨識，要求使用者更新瀏覽器。
     infoBox.innerText = "本瀏覽器不支援語音辨識，請更換瀏覽器！(Chrome 25 版以上才支援語音辨識)";
 } else {
-    var recognition = new webkitSpeechRecognition(); // 建立語音辨識物件 webkitSpeechRecognition
+    var recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition || window.mozSpeechRecognition || window.msSpeechRecognition)(); // 建立語音辨識物件 webkitSpeechRecognition
     recognition.continuous = true; // 設定連續辨識模式
     recognition.interimResults = true; // 設定輸出中先結果。
 
@@ -61,17 +76,4 @@ if (!('webkitSpeechRecognition' in window)) {  // 如果找不到 window.webkitS
     };
 }
 
-function submitTask(){
-    var taskContent = document.getElementById('wordsExpect').value;
-    $.ajax({
-        url:'test.txt',
-        method: 'post',
-        data: {message: taskContent},
-        success: function(res){
 
-        },
-        error: function(err){
-            alert(err);
-        }
-    });
-}
