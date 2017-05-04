@@ -14,17 +14,18 @@ function submitTask(){
     var taskContent = document.getElementById('wordsExpect');
     $("#spinner").addClass("show");
     $("#submitImg").hide();
+
     $.ajax({
         url:'https://nineyi.azurewebsites.net/Trello/Input',
-        url: 'test.txt',
         type: 'POST',
         dataType: 'JSON',
         data: {"content": taskContent.value},
-        success: function(){
+        success: function(res){
             // var item = [{'Title':'111', 'Status':'Doing', 'MemberId': 'Andy'},{'Title':'222', 'Status':'Todo', 'MemberId': 'Andy'},{'Title':'333', 'Status':'Done', 'MemberId': 'Andy'}];
             // var res = ["","","{\"TotalCount\":\"3\",\"DoingCount\":\"1\",\"TodoCount\":\"1\",\"DoneCount\":\"1\"}",
             //     item];
             if(res){
+                apiRes.innerHTML = apiRes.innerHTML.replace("快～到下方跟我說說話", "");
                 if(res[res.length-1] === 'OK'){
                     taskContent.value = "";
                     $("#submitImg").show();
@@ -36,7 +37,7 @@ function submitTask(){
                 // 標題列
                 var totalArr = JSON.parse(res[res.length - 2]);
 
-                apiRes.innerHTML = "<div class='task-wrapper'>";
+                apiRes.innerHTML += "<div class='task-wrapper'>";
                 apiRes.innerHTML += "<div class='task-top-container bottom-gutter-md'>"+
                                         "<div class='task-request'>∞  " + taskContent.value + "</div>"+
                                         "<div class='task-total-container'>" +
