@@ -20,7 +20,7 @@ function submitTask(){
         data: {"content": taskContent.value},
         success: function(res){
             if(res){
-                if(res === 'ok'){
+                if(res === 'OK'){
                     taskContent.value = "";
                     toastBar.innerHTML = "新增卡片成功！";
                     $("#snackbar").addClass("show");
