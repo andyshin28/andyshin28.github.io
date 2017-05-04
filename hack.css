@@ -1,0 +1,19 @@
+.main-form{
+    padding: 10px;
+
+}
+.title{
+    text-align: center;
+}
+.controll-btn-container{
+    text-align: center;
+}
+.record-img-btn{
+    margin-right: 10px;
+    border: 1px #999 solid;
+    border-radius: 50px;
+    box-shadow:3px 3px 3px #888888;
+}
+
+
+/*  */

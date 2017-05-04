@@ -10,12 +10,19 @@ var recognizing = false; // 是否辨識中
 function submitTask(){
     var taskContent = document.getElementById('wordsExpect').value;
     $.ajax({
-        url:'test.txt',
+        url:'https://nineyi.azurewebsites.net/Trello/Input',
         type: 'POST',
-        data: {message: taskContent},
+        dataType: 'JSON',
+        data: {"content": taskContent},
         beforeSend: function(){},
         success: function(res){
-            alert('任務新增成功！假的');
+            alert('新增任務成功');
+            if(res){
+                for(var i in res){
+                    document.getElementById('apiRes').innerHTML += res[i] + "<br/>";
+                }
+            }
+
         },
         error: function(err){
             alert('新增任務有些小問題');
