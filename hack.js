@@ -20,43 +20,56 @@ function submitTask(){
         data: {"content": taskContent.value},
         success: function(res){
             if(res){
+                if(res === 'ok'){
+                    taskContent.value = "";
+                    toastBar.innerHTML = "新增卡片成功！";
+                    $("#snackbar").addClass("show");
+                    closeToast(2000);
+                    return;
+                }
                 // 標題列
                 var totalArr = JSON.parse(res[res.length - 2]);
                 // apiRes.innerHTML += "<div class='task-wrapper'>";
                 apiRes.innerHTML += "<div class='task-top-container bottom-gutter-sm'>"+
-                                        "<div class='task-request'>" + taskContent.value + "</div>"+
+                                        "<div class='task-request'>∞  " + taskContent.value + "</div>"+
                                         "<div class='task-total-container'>" +
                                             "<span class='task-total-title'>Total</span>" +
                                             "<span class='task-total-content'>" + totalArr.TotalCount + "</span></div>"+
                                     "</div>";
                 // 狀態列
-                apiRes.innerHTML += "<div class='task-status-container bottom-gutter-md'>" +
-                        "<div class='todo-container status-rectangle display-line'>" +
+                apiRes.innerHTML += "<div class='task-status-container bottom-gutter-md text-center'>" +
+                        "<div class='todo-container status-rectangle display-line text-white'>" +
                                 "<div>Todo</div>" +
-                                "<div class='text-center'>" + totalArr.TodoCount + "</div>" +
+                                "<div class='text-center font-lg'>" + totalArr.TodoCount + "</div>" +
                         "</div>"+
-                        "<div class='doing-container status-rectangle display-line'>" +
+                        "<div class='doing-container status-rectangle display-line text-white'>" +
                                 "<div>Doing</div>" +
-                                "<div class='text-center'>" + totalArr.DoingCount + "</div>" +
+                                "<div class='text-center font-lg'>" + totalArr.DoingCount + "</div>" +
                         "</div>"+
-                        "<div class='done-container status-rectangle display-line'>" +
+                        "<div class='done-container status-rectangle display-line text-white'>" +
                                 "<div>Done</div>" +
-                                "<div class='text-center'>" + totalArr.DoneCount + "</div>" +
+                                "<div class='text-center font-lg'>" + totalArr.DoneCount + "</div>" +
                         "</div>"+
                     "</div>";
-                var taskArr = JSON.parse(res[res.length - 1]);
+
                 // 清單
+                var taskArr = JSON.parse(res[res.length - 1]);
                 for(var i in taskArr){
                     var title = taskArr[i].Title;
                     var status = taskArr[i].Status;
                     var memberId = taskArr[i].MemberId;
-                    apiRes.innerHTML += "<div class='task-list-item bottom-gutter-sm'>" +
-                                            "<div class='task-status-tag'>" + status + "</div>" +
+                    apiRes.innerHTML += "<div class='task-list-item bottom-gutter-sm' onclick=\"goText('" + title + "')\">" +
+                                            "<div class='task-status-tag text-center " + getStatusTag(status) + "'>" + status + "</div>" +
                                             "<div class='task-title'>" + title + "</div>" +
                                         "</div>";
                 }
 
                 // apiRes.innerHTML += "</div>";
+
+                // 辨識度
+                // for(var i = 0; i < res.length - 2;i++ ){
+                //     apiRes.innerHTML += res[i]+"<br/>";
+                // }
                 apiRes.innerHTML += "<br/>";
 
                 taskContent.value = "";
@@ -64,7 +77,7 @@ function submitTask(){
                 $("#snackbar").addClass("show");
                 closeToast(2000);
             }else{
-                toastBar.innerHTML = "主人我接到了，但是是非預期的狀況";
+                toastBar.innerHTML = "主人我接到了，但是是非預期的狀況喔";
             }
         },
         error: function(err){
@@ -78,23 +91,26 @@ function submitTask(){
     });
 }
 
-function listTask(){
-    $.ajax({
-        url: '',
-        data: {'content': ''},
-        dataType: 'JSON',
-        success: function(){
+function getStatusTag(status){
+    var tagStyle = "";
+    if(status === 'Todo'){
+        tagStyle = "todo-tag";
+    }else if (status === 'Doing'){
+        tagStyle = "doing-tag";
+    }else{
+        tagStyle = "done-tag";
+    }
+    return tagStyle;
+}
 
-        },
-        error: function(){
-
-        }
-    });
+function goText(text){
+    var dom = document.getElementById('wordsExpect');
+    dom.value = text + ",";
+    dom.focus();
 }
 
 function closeToast(time){
     setTimeout(function(){
-        // toastBar.className = toastBar.className.replace("show", "");
         $("#snackbar").removeClass("show");
     }, time);
 }
