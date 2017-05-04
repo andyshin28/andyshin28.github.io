@@ -2,6 +2,7 @@ var infoBox = document.getElementById("infoBox"); // 取得訊息控制項 infoB
 var textBox = document.getElementById("wordsExpect"); // 取得最終的辨識訊息控制項 textBox
 var tempBox = document.getElementById("wordsExpect"); // 取得中間的辨識訊息控制項 tempBox
 var recordImgBtn = document.getElementById("recordImgBtn"); // 錄音鈕
+var toastBar = document.getElementById("snackbar")
 var startStopButton; // 「辨識/停止」按鈕
 var final_transcript = ''; // 最終的辨識訊息的變數
 var recognizing = false; // 是否辨識中
@@ -16,19 +17,26 @@ function submitTask(){
         data: {"content": taskContent},
         beforeSend: function(){},
         success: function(res){
-            alert('新增任務成功');
             if(res){
                 for(var i in res){
                     document.getElementById('apiRes').innerHTML += res[i] + "<br/>";
                 }
             }
-
+            toastBar.innerHTML = "送出成功";
+            toastBar.className = "show";
+            closeToast();
         },
         error: function(err){
-            alert('新增任務有些小問題');
+            toastBar.innerHTML = "有點小問題 顆顆～請稍後再試";
+            toastBar.className = "show";
+            closeToast();
         },
         complete: function(){}
     });
+}
+
+function closeToast(){
+    setTimeout(function(){ toastBar.className = toastBar.className.replace("show", ""); }, 3000);
 }
 
 // 開始語音辨識
@@ -38,9 +46,9 @@ function startRecord() {
 
     if (recognizing) { // 如果正在辨識，則停止。
         recognition.stop();
-        recordImgBtn.src = 'mic.gif';
+        recordImgBtn.src = 'image/mic.gif';
     } else { // 否則就開始辨識
-        recordImgBtn.src = 'mic-animate.gif';
+        recordImgBtn.src = 'image/mic-animate.gif';
         textBox.value = ''; // 清除最終的辨識訊息
         tempBox.value = ''; // 清除中間的辨識訊息
         final_transcript = ''; // 最終的辨識訊息變數
@@ -51,7 +59,7 @@ function startRecord() {
 
 if (!('webkitSpeechRecognition' in window)) {  // 如果找不到 window.webkitSpeechRecognition 這個屬性
     // 就是不支援語音辨識，要求使用者更新瀏覽器。
-    infoBox.innerText = "本瀏覽器不支援語音辨識，請更換瀏覽器！(Chrome 25 版以上才支援語音辨識)";
+    // infoBox.innerText = "本瀏覽器不支援語音辨識，請更換瀏覽器！(Chrome 25 版以上才支援語音辨識)";
 } else {
     var recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition || window.mozSpeechRecognition || window.msSpeechRecognition)(); // 建立語音辨識物件 webkitSpeechRecognition
     recognition.continuous = true; // 設定連續辨識模式

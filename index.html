@@ -6,27 +6,37 @@
     <title>己所不欲開卡於人</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" crossorigin="anonymous" />
     <link rel="stylesheet" href="hack.css">
+    <link rel="stylesheet" href="snackBarToast.css">
 
 </head>
 <body>
 
 <div class="container">
     <div class="row">
+        <div id="titleContainer" class="title">
+            <h3>HackDay OMG</h3>
+        </div>
+        <!--語音輸入-->
         <form id="mainForm" class="main-form">
-            <div id="titleContainer" class="title">
-                <h3>HackDay OMG</h3>
-            </div>
+
+            <!--Trello清單-->
             <div class="form-group">
-                <textarea name=""rows="5" id="wordsExpect"class="form-control" required></textarea>
+                <div id="listContainer">這裡會有任務清單</div>
             </div>
 
-            <div id="controllBtnContainer" class="controll-btn-container">
+            <div class="form-group">
+                <input id="wordsExpect" class="form-control" placeholder="請吩咐我主人" required />
+            </div>
+
+            <div id="controllBtnContainer" class="controll-btn-container form-group">
                 <!--<input type="button" value="錄音" class="btn btn-default"/>-->
-                <!--<img src="mic.gif" alt="mic" id="recordImgBtn" class="record-img-btn" onclick="startRecord()"/>-->
+                <!--<img src="image/mic.gif" alt="mic" id="recordImgBtn" class="record-img-btn" onclick="startRecord()"/>-->
                 <button type="button" class="btn btn-success" onclick="submitTask()">送出任務</button>
             </div>
+
             <div id="infoBox"></div>
             <div id="apiRes"></div>
+            <div id="snackbar">This is a Toast.</div>
         </form>
     </div>
 </div>
