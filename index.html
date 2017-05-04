@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" crossorigin="anonymous" />
     <link rel="stylesheet" href="hack.css">
     <link rel="stylesheet" href="snackBarToast.css">
+    <link rel="stylesheet" href="spinner.css">
 
 </head>
 <body>
@@ -16,30 +17,49 @@
         <div id="titleContainer" class="title">
             <h3>HackDay OMG</h3>
         </div>
-        <!--語音輸入-->
-        <form id="mainForm" class="main-form">
 
-            <!--Trello清單-->
+        <form id="listForm" class="list-form">
+            <!--清單-->
             <div class="form-group">
                 <div id="listContainer">這裡會有任務清單</div>
             </div>
 
-            <div class="form-group">
-                <input id="wordsExpect" class="form-control" placeholder="請吩咐我主人" required />
+            <!--ajax img-->
+            <div id="spinner" class="spinner">
+                <div class="rect1"></div>
+                <div class="rect2"></div>
+                <div class="rect3"></div>
+                <div class="rect4"></div>
+                <div class="rect5"></div>
             </div>
 
-            <div id="controllBtnContainer" class="controll-btn-container form-group">
-                <!--<input type="button" value="錄音" class="btn btn-default"/>-->
-                <!--<img src="image/mic.gif" alt="mic" id="recordImgBtn" class="record-img-btn" onclick="startRecord()"/>-->
-                <button type="button" class="btn btn-success" onclick="submitTask()">送出任務</button>
-            </div>
-
+            <!--查詢結果-->
             <div id="infoBox"></div>
             <div id="apiRes"></div>
             <div id="snackbar">This is a Toast.</div>
         </form>
     </div>
 </div>
+<div class="controll-btn-container">
+    <div class="container">
+        <div class="row">
+            <form id="mainForm" class="main-form">
+                <!--輸入控制-->
+                <div class="form-group">
+                    <input id="wordsExpect" class="form-control" placeholder="請吩咐我主人" required />
+                </div>
+
+                <!--按鈕控制-->
+                <div id="controllBtnContainer" class="form-group">
+                    <!--<input type="button" value="錄音" class="btn btn-default"/>-->
+                    <!--<img src="image/mic.gif" alt="mic" id="recordImgBtn" class="record-img-btn" onclick="startRecord()"/>-->
+                    <button type="button" class="btn btn-success cute-btn" onclick="submitTask()">送出任務</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="hack.js"></script>

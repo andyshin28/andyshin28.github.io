@@ -2,41 +2,65 @@ var infoBox = document.getElementById("infoBox"); // 取得訊息控制項 infoB
 var textBox = document.getElementById("wordsExpect"); // 取得最終的辨識訊息控制項 textBox
 var tempBox = document.getElementById("wordsExpect"); // 取得中間的辨識訊息控制項 tempBox
 var recordImgBtn = document.getElementById("recordImgBtn"); // 錄音鈕
-var toastBar = document.getElementById("snackbar")
+var toastBar = document.getElementById("snackbar");
+var spinnerImg = document.getElementById("spinner"); // ajax img
 var startStopButton; // 「辨識/停止」按鈕
 var final_transcript = ''; // 最終的辨識訊息的變數
 var recognizing = false; // 是否辨識中
 
 // 送出任務
 function submitTask(){
-    var taskContent = document.getElementById('wordsExpect').value;
+    var taskContent = document.getElementById('wordsExpect');
+    $("#spinner").addClass("show");
     $.ajax({
         url:'https://nineyi.azurewebsites.net/Trello/Input',
         type: 'POST',
         dataType: 'JSON',
-        data: {"content": taskContent},
-        beforeSend: function(){},
+        data: {"content": taskContent.value},
         success: function(res){
             if(res){
                 for(var i in res){
                     document.getElementById('apiRes').innerHTML += res[i] + "<br/>";
                 }
+
+                taskContent.innerHTML = "";
+                toastBar.innerHTML = "Success";
+                $("#snackbar").addClass("show");
+                closeToast(2000);
+            }else{
+                toastBar.innerHTML = "主人我接到了，但是是非預期的狀況";
             }
-            toastBar.innerHTML = "送出成功";
-            toastBar.className = "show";
-            closeToast();
         },
         error: function(err){
             toastBar.innerHTML = "有點小問題 顆顆～請稍後再試";
-            toastBar.className = "show";
-            closeToast();
+            $("#snackbar").addClass("show");
+            closeToast(2000);
         },
-        complete: function(){}
+        complete: function(){
+            $("#spinner").removeClass("show");
+        }
     });
 }
 
-function closeToast(){
-    setTimeout(function(){ toastBar.className = toastBar.className.replace("show", ""); }, 3000);
+function listTask(){
+    $.ajax({
+        url: '',
+        data: {'content': ''},
+        dataType: 'JSON',
+        success: function(){
+
+        },
+        error: function(){
+
+        }
+    });
+}
+
+function closeToast(time){
+    setTimeout(function(){
+        // toastBar.className = toastBar.className.replace("show", "");
+        $("#snackbar").removeClass("show");
+    }, time);
 }
 
 // 開始語音辨識

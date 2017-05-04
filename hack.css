@@ -1,12 +1,23 @@
 .main-form{
     padding: 10px;
-
+    background-color: #ddd;
+}
+.list-form{
+    padding: 10px;
 }
 .title{
     text-align: center;
 }
+
+/*語音控制*/
 .controll-btn-container{
     text-align: center;
+    position: fixed;
+    bottom: 0px;
+    z-index: 99;
+    width: 100%;
+    border-top: 1px solid #ccc;
+    box-shadow: 0 6px 10px 5px #999
 }
 .record-img-btn{
     margin-right: 10px;
@@ -16,4 +27,6 @@
 }
 
 
-/*  */
+.cute-btn{
+    border-radius: 55px;
+}
