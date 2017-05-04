@@ -20,9 +20,9 @@ function submitTask(){
         data: {"content": taskContent.value},
         success: function(res){
             if(res){
-                if(res === 'OK'){
+                if(res[res.length-1] === 'OK'){
                     taskContent.value = "";
-                    toastBar.innerHTML = "新增卡片成功！";
+                    toastBar.innerHTML = "操作成功！";
                     $("#snackbar").addClass("show");
                     closeToast(2000);
                     return;
