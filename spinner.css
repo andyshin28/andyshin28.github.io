@@ -9,13 +9,14 @@
     right: 50px;
     bottom: 17px;
     z-index: 100;
+    right:43vw;
 }
 .spinner.show{
     visibility: visible;
 }
 
 .spinner > div {
-    background-color: #333;
+    background-color: #fff;
     height: 100%;
     width: 6px;
     display: inline-block;

@@ -21,7 +21,7 @@
         <form id="listForm" class="list-form">
             <!--查詢結果-->
             <div id="infoBox"></div>
-            <div id="apiRes" style="background-color: #fff;"></div>
+            <div id="apiRes" style="background-color: #fff;padding:15px;">快～到下方跟我說說話</div>
             <div id="snackbar">This is a Toast.</div>
         </form>
     </div>
@@ -39,7 +39,8 @@
                 <div id="controllBtnContainer" class="form-group">
                     <!--<input type="button" value="錄音" class="btn btn-default"/>-->
                     <!--<img src="image/mic.gif" alt="mic" id="recordImgBtn" class="record-img-btn" onclick="startRecord()"/>-->
-                    <button type="button" class="btn btn-success cute-btn" onclick="submitTask()">送出任務</button>
+                    <!--<button type="button" class="btn btn-success cute-btn" onclick="submitTask()">送出任務</button>-->
+                    <img src="image/submit.svg" id="submitImg" width="55" height="55" alt="submit" onclick="submitTask()" style="cursor: pointer;">
                     <!--ajax img-->
                     <div id="spinner" class="spinner">
                         <div class="rect1"></div>

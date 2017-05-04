@@ -10,7 +10,7 @@
     position: fixed;
     z-index: 1;
     left: 50%;
-    bottom: 45vh;
+    bottom: 50vh;
     font-size: 17px;
 }
 
@@ -22,20 +22,20 @@
 
 @-webkit-keyframes fadein {
     from {bottom: 40vh; opacity: 0;}
-    to {bottom: 45vh; opacity: 1;}
+    to {bottom: 50vh; opacity: 1;}
 }
 
 @keyframes fadein {
     from {bottom: 40vh; opacity: 0;}
-    to {bottom: 45vh; opacity: 1;}
+    to {bottom: 50vh; opacity: 1;}
 }
 
 @-webkit-keyframes fadeout {
-    from {bottom: 45vh; opacity: 1;}
+    from {bottom: 50vh; opacity: 1;}
     to {bottom: 40vh; opacity: 0;}
 }
 
 @keyframes fadeout {
-    from {bottom: 45vh; opacity: 1;}
+    from {bottom: 50vh; opacity: 1;}
     to {bottom: 40vh; opacity: 0;}
 }

@@ -13,15 +13,21 @@ var recognizing = false; // 是否辨識中
 function submitTask(){
     var taskContent = document.getElementById('wordsExpect');
     $("#spinner").addClass("show");
+    $("#submitImg").hide();
     $.ajax({
         url:'https://nineyi.azurewebsites.net/Trello/Input',
+        url: 'test.txt',
         type: 'POST',
         dataType: 'JSON',
         data: {"content": taskContent.value},
-        success: function(res){
+        success: function(){
+            // var item = [{'Title':'111', 'Status':'Doing', 'MemberId': 'Andy'},{'Title':'222', 'Status':'Todo', 'MemberId': 'Andy'},{'Title':'333', 'Status':'Done', 'MemberId': 'Andy'}];
+            // var res = ["","","{\"TotalCount\":\"3\",\"DoingCount\":\"1\",\"TodoCount\":\"1\",\"DoneCount\":\"1\"}",
+            //     item];
             if(res){
                 if(res[res.length-1] === 'OK'){
                     taskContent.value = "";
+                    $("#submitImg").show();
                     toastBar.innerHTML = "操作成功！";
                     $("#snackbar").addClass("show");
                     closeToast(2000);
@@ -29,15 +35,16 @@ function submitTask(){
                 }
                 // 標題列
                 var totalArr = JSON.parse(res[res.length - 2]);
-                // apiRes.innerHTML += "<div class='task-wrapper'>";
-                apiRes.innerHTML += "<div class='task-top-container bottom-gutter-sm'>"+
+
+                apiRes.innerHTML = "<div class='task-wrapper'>";
+                apiRes.innerHTML += "<div class='task-top-container bottom-gutter-md'>"+
                                         "<div class='task-request'>∞  " + taskContent.value + "</div>"+
                                         "<div class='task-total-container'>" +
                                             "<span class='task-total-title'>Total</span>" +
                                             "<span class='task-total-content'>" + totalArr.TotalCount + "</span></div>"+
                                     "</div>";
                 // 狀態列
-                apiRes.innerHTML += "<div class='task-status-container bottom-gutter-md text-center'>" +
+                apiRes.innerHTML += "<div class='task-status-container bottom-gutter-md'>" +
                         "<div class='todo-container status-rectangle display-line text-white'>" +
                                 "<div>Todo</div>" +
                                 "<div class='text-center font-lg'>" + totalArr.TodoCount + "</div>" +
@@ -54,6 +61,7 @@ function submitTask(){
 
                 // 清單
                 var taskArr = JSON.parse(res[res.length - 1]);
+                // var taskArr = res[res.length - 1];
                 for(var i in taskArr){
                     var title = taskArr[i].Title;
                     var status = taskArr[i].Status;
@@ -64,7 +72,7 @@ function submitTask(){
                                         "</div>";
                 }
 
-                // apiRes.innerHTML += "</div>";
+                apiRes.innerHTML += "</div>";
 
                 // 辨識度
                 // for(var i = 0; i < res.length - 2;i++ ){
@@ -86,6 +94,7 @@ function submitTask(){
             closeToast(2000);
         },
         complete: function(){
+            $("#submitImg").show();
             $("#spinner").removeClass("show");
         }
     });
