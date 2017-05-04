@@ -12,27 +12,13 @@
 </head>
 <body>
 
-<div class="container">
+<div class="container list-container">
     <div class="row">
         <div id="titleContainer" class="title">
             <h3>HackDay OMG</h3>
         </div>
 
         <form id="listForm" class="list-form">
-            <!--清單-->
-            <div class="form-group">
-                <div id="listContainer">這裡會有任務清單</div>
-            </div>
-
-            <!--ajax img-->
-            <div id="spinner" class="spinner">
-                <div class="rect1"></div>
-                <div class="rect2"></div>
-                <div class="rect3"></div>
-                <div class="rect4"></div>
-                <div class="rect5"></div>
-            </div>
-
             <!--查詢結果-->
             <div id="infoBox"></div>
             <div id="apiRes"></div>
@@ -54,6 +40,14 @@
                     <!--<input type="button" value="錄音" class="btn btn-default"/>-->
                     <!--<img src="image/mic.gif" alt="mic" id="recordImgBtn" class="record-img-btn" onclick="startRecord()"/>-->
                     <button type="button" class="btn btn-success cute-btn" onclick="submitTask()">送出任務</button>
+                    <!--ajax img-->
+                    <div id="spinner" class="spinner">
+                        <div class="rect1"></div>
+                        <div class="rect2"></div>
+                        <div class="rect3"></div>
+                        <div class="rect4"></div>
+                        <div class="rect5"></div>
+                    </div>
                 </div>
             </form>
         </div>

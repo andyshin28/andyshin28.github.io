@@ -1,12 +1,20 @@
+body{
+    background-color: #f3f3f3;
+}
 .main-form{
     padding: 10px;
-    background-color: #ddd;
+    margin-top: 10px
 }
 .list-form{
     padding: 10px;
 }
 .title{
     text-align: center;
+}
+/*清單*/
+.list-container{
+    height: 80vh;
+    overflow: auto;
 }
 
 /*語音控制*/
@@ -17,7 +25,9 @@
     z-index: 99;
     width: 100%;
     border-top: 1px solid #ccc;
-    box-shadow: 0 6px 10px 5px #999
+    box-shadow: 0 6px 10px 5px #999;
+    background-color: #1d1d1d;
+    height: 20vh;
 }
 .record-img-btn{
     margin-right: 10px;
@@ -26,7 +36,68 @@
     box-shadow:3px 3px 3px #888888;
 }
 
-
 .cute-btn{
     border-radius: 55px;
+}
+.task-top-container{
+    position: relative;
+}
+.task-request{
+    display: inline-block;
+}
+.task-total-container{
+    display: inline-block;
+    position: absolute;
+    right: 0px;
+}
+
+.task-total-title{
+    margin-right: 10px;
+}
+.task-total-content{
+}
+
+.status-rectangle{
+    border: 1px #333 solid;
+    box-sizing: border-box;
+    padding: 5px 10px;
+    border-radius: 5px;
+    width: 30%;
+    margin-right: 10px;
+}
+
+.task-status-tag{
+    display: inline-block;
+    box-sizing: border-box;
+    padding: 1px 7px;
+    border: 1px #333 solid;
+    border-radius: 5px;
+    margin-right: 5px
+}
+
+.task-title{
+    display: inline;
+}
+
+.task-list-item{
+}
+
+.display-line{
+    display: inline-block;
+}
+
+.bottom-gutter-sm{
+    margin-bottom: 5px;
+}
+
+.bottom-gutter-md{
+    margin-bottom: 15px;
+}
+
+.bottom-gutter-lg{
+    margin-bottom: 20px;
+}
+
+.text-center{
+    text-align: center;
 }

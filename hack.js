@@ -4,6 +4,7 @@ var tempBox = document.getElementById("wordsExpect"); // 取得中間的辨識�
 var recordImgBtn = document.getElementById("recordImgBtn"); // 錄音鈕
 var toastBar = document.getElementById("snackbar");
 var spinnerImg = document.getElementById("spinner"); // ajax img
+var apiRes = document.getElementById('apiRes');
 var startStopButton; // 「辨識/停止」按鈕
 var final_transcript = ''; // 最終的辨識訊息的變數
 var recognizing = false; // 是否辨識中
@@ -19,11 +20,46 @@ function submitTask(){
         data: {"content": taskContent.value},
         success: function(res){
             if(res){
-                for(var i in res){
-                    document.getElementById('apiRes').innerHTML += res[i] + "<br/>";
+                // 標題列
+                var totalArr = JSON.parse(res[res.length - 2]);
+                // apiRes.innerHTML += "<div class='task-wrapper'>";
+                apiRes.innerHTML += "<div class='task-top-container bottom-gutter-sm'>"+
+                                        "<div class='task-request'>" + taskContent.value + "</div>"+
+                                        "<div class='task-total-container'>" +
+                                            "<span class='task-total-title'>Total</span>" +
+                                            "<span class='task-total-content'>" + totalArr.TotalCount + "</span></div>"+
+                                    "</div>";
+                // 狀態列
+                apiRes.innerHTML += "<div class='task-status-container bottom-gutter-md'>" +
+                        "<div class='todo-container status-rectangle display-line'>" +
+                                "<div>Todo</div>" +
+                                "<div class='text-center'>" + totalArr.TodoCount + "</div>" +
+                        "</div>"+
+                        "<div class='doing-container status-rectangle display-line'>" +
+                                "<div>Doing</div>" +
+                                "<div class='text-center'>" + totalArr.DoingCount + "</div>" +
+                        "</div>"+
+                        "<div class='done-container status-rectangle display-line'>" +
+                                "<div>Done</div>" +
+                                "<div class='text-center'>" + totalArr.DoneCount + "</div>" +
+                        "</div>"+
+                    "</div>";
+                var taskArr = JSON.parse(res[res.length - 1]);
+                // 清單
+                for(var i in taskArr){
+                    var title = taskArr[i].Title;
+                    var status = taskArr[i].Status;
+                    var memberId = taskArr[i].MemberId;
+                    apiRes.innerHTML += "<div class='task-list-item bottom-gutter-sm'>" +
+                                            "<div class='task-status-tag'>" + status + "</div>" +
+                                            "<div class='task-title'>" + title + "</div>" +
+                                        "</div>";
                 }
 
-                taskContent.innerHTML = "";
+                // apiRes.innerHTML += "</div>";
+                apiRes.innerHTML += "<br/>";
+
+                taskContent.value = "";
                 toastBar.innerHTML = "Success";
                 $("#snackbar").addClass("show");
                 closeToast(2000);
