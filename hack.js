@@ -45,18 +45,18 @@ function submitTask(){
                                             "<span class='task-total-content'>" + totalArr.TotalCount + "</span></div>"+
                                     "</div>";
                 // 狀態列(dashborad)
-                apiRes.innerHTML += "<div class='task-status-container bottom-gutter-md'>" +
+                apiRes.innerHTML += "<div class='task-status-container bottom-gutter-md text-center'>" +
                         "<div class='todo-container status-rectangle display-line text-white'>" +
-                                "<div>Todo</div>" +
-                                "<div class='text-center font-lg'>" + totalArr.TodoCount + "</div>" +
+                                "<div class='text-left'>Todo</div>" +
+                                "<div class='font-lg'>" + totalArr.TodoCount + "</div>" +
                         "</div>"+
                         "<div class='doing-container status-rectangle display-line text-white'>" +
-                                "<div>Doing</div>" +
-                                "<div class='text-center font-lg'>" + totalArr.DoingCount + "</div>" +
+                                "<div class='text-left'>Doing</div>" +
+                                "<div class='font-lg'>" + totalArr.DoingCount + "</div>" +
                         "</div>"+
                         "<div class='done-container status-rectangle display-line text-white'>" +
-                                "<div>Done</div>" +
-                                "<div class='text-center font-lg'>" + totalArr.DoneCount + "</div>" +
+                                "<div class='text-left'>Done</div>" +
+                                "<div class='font-lg'>" + totalArr.DoneCount + "</div>" +
                         "</div>"+
                     "</div>";
 
