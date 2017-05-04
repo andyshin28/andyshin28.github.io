@@ -44,7 +44,7 @@ function submitTask(){
                                             "<span class='task-total-title'>Total</span>" +
                                             "<span class='task-total-content'>" + totalArr.TotalCount + "</span></div>"+
                                     "</div>";
-                // 狀態列
+                // 狀態列(dashborad)
                 apiRes.innerHTML += "<div class='task-status-container bottom-gutter-md'>" +
                         "<div class='todo-container status-rectangle display-line text-white'>" +
                                 "<div>Todo</div>" +
@@ -79,12 +79,13 @@ function submitTask(){
                 // for(var i = 0; i < res.length - 2;i++ ){
                 //     apiRes.innerHTML += res[i]+"<br/>";
                 // }
-                apiRes.innerHTML += "<br/>";
+                apiRes.innerHTML += "<hr>";
+                // apiRes.innerHTML += "<br/>";
 
                 taskContent.value = "";
                 toastBar.innerHTML = "Success";
                 $("#snackbar").addClass("show");
-                closeToast(2000);
+                closeToast(3000);
             }else{
                 toastBar.innerHTML = "主人我接到了，但是是非預期的狀況喔";
             }
@@ -92,7 +93,7 @@ function submitTask(){
         error: function(err){
             toastBar.innerHTML = "有點小問題 顆顆～請稍後再試";
             $("#snackbar").addClass("show");
-            closeToast(2000);
+            closeToast(3000);
         },
         complete: function(){
             $("#submitImg").show();
@@ -121,7 +122,8 @@ function goText(text){
 
 function closeToast(time){
     setTimeout(function(){
-        $("#snackbar").removeClass("show");
+        // $("#snackbar").removeClass("show");
+        toastBar.className = toastBar.className.replace("show", "");
     }, time);
 }
 
